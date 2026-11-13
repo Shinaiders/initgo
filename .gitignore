@@ -1,0 +1,38 @@
+# Binários e builds
+/bin/
+/tmp/
+/dist/
+build-errors.log
+/server
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Configurações locais sensíveis
+.env
+!.env.example
+
+# Bancos SQLite locais
+*.db
+*.db-journal
+
+# Diretório de armazenamento local e screenshots
+storage/screenshots/*
+!storage/screenshots/.gitkeep
+
+# IDEs e editores
+.idea/
+.vscode/
+.zed/*
+!.zed/settings.json
+*.swp
+*~
+.DS_Store
+
+# Node e dependências
+node_modules/
+npm-debug.log*

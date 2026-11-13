@@ -1,0 +1,128 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: goscrapper_api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      - PORT=8080
+      - ENV=production
+      - DB_DRIVER=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=goscrapper_db
+      - DB_SSLMODE=disable
+      - PLAYWRIGHT_HEADLESS=true
+      - PLAYWRIGHT_TIMEOUT_SEC=30
+      # Redis (opcional - mude para true quando quiser torná-lo obrigatório)
+      - ENABLE_REDIS=${ENABLE_REDIS:-false}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      # RabbitMQ (opcional - mude para true quando quiser torná-lo obrigatório)
+      - ENABLE_RABBITMQ=${ENABLE_RABBITMQ:-false}
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - RABBITMQ_QUEUE=scrape_tasks
+      # RustFS (opcional - mude para true quando quiser torná-lo obrigatório)
+      - ENABLE_RUSTFS=${ENABLE_RUSTFS:-false}
+      - RUSTFS_ENDPOINT=rustfs:9000
+      - RUSTFS_ACCESS_KEY=rustfsadmin
+      - RUSTFS_SECRET_KEY=rustfsadmin
+      - RUSTFS_BUCKET=goscrapper-screenshots
+      - RUSTFS_USE_SSL=false
+      - RUSTFS_PUBLIC_URL=http://localhost:9000
+    volumes:
+      - ./storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - goscrapper_net
+
+  db:
+    image: postgres:16-alpine
+    container_name: goscrapper_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: goscrapper_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d goscrapper_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - goscrapper_net
+
+  # Redis (Cache em memória de alta performance)
+  redis:
+    image: redis:7-alpine
+    container_name: goscrapper_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - goscrapper_net
+
+  # RabbitMQ (Mensageria e Filas de tarefas)
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: goscrapper_rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"   # AMQP
+      - "15672:15672" # Painel Web Management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - goscrapper_net
+
+  # RustFS (Armazenamento de Objetos compatível com S3)
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: goscrapper_rustfs
+    restart: unless-stopped
+    ports:
+      - "9000:9000" # API S3
+      - "9001:9001" # Painel Web Console
+    environment:
+      - RUSTFS_VOLUMES=/data
+      - RUSTFS_ADDRESS=0.0.0.0:9000
+      - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
+      - RUSTFS_CONSOLE_ENABLE=true
+      - RUSTFS_ACCESS_KEY=rustfsadmin
+      - RUSTFS_SECRET_KEY=rustfsadmin
+    volumes:
+      - rustfs_data:/data
+    networks:
+      - goscrapper_net
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  rustfs_data:
+    driver: local
+
+networks:
+  goscrapper_net:
+    driver: bridge

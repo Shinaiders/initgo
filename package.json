@@ -1,0 +1,15 @@
+{
+  "name": "goscrapper",
+  "version": "1.0.0",
+  "description": "Projeto em **Go (Golang)** de alta performance estruturado com **Clean Architecture**, integrando a API web **Gin**, o motor de automação e raspagem **Playwright**, o ORM **GORM** (PostgreSQL/SQLite), além de suporte opcional/ativável para **Redis**, **RabbitMQ** e **RustFS** (S3-compatible object storage).",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "prettier": "^3.10.1"
+  }
+}

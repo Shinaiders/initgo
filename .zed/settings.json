@@ -1,0 +1,46 @@
+{
+  "disable_ai": false,
+  "format_on_save": "on",
+  "prettier": {
+    "allowed": true
+  },
+  "languages": {
+    "Go": {
+      "tab_size": 4,
+      "format_on_save": "on",
+      "formatter": "language_server"
+    },
+    "JSON": {
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "Markdown": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "YAML": {
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "HTML": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "CSS": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "TypeScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "prettier"
+    }
+  }
+}
