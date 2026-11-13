@@ -1,13 +1,38 @@
 {
-  "name": "goscrapper",
+  "name": "create-goinitshinaider",
   "version": "1.0.0",
-  "description": "Projeto em **Go (Golang)** de alta performance estruturado com **Clean Architecture**, integrando a API web **Gin**, o motor de automação e raspagem **Playwright**, o ORM **GORM** (PostgreSQL/SQLite), além de suporte opcional/ativável para **Redis**, **RabbitMQ** e **RustFS** (S3-compatible object storage).",
-  "main": "index.js",
+  "description": "CLI e gerador de projetos Go a partir do template initgo (Gin, Clean Arch, GORM, Playwright, RabbitMQ, Redis, RustFS)",
+  "main": "cli/bin.js",
+  "bin": {
+    "create-goinitshinaider": "./cli/bin.js",
+    "goinitshinaider": "./cli/bin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shinaiders/initgo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shinaiders/initgo/issues"
+  },
+  "homepage": "https://github.com/Shinaiders/initgo#readme",
+  "author": "Lucas Santana",
+  "license": "MIT",
+  "keywords": [
+    "golang",
+    "template",
+    "boilerplate",
+    "scraper",
+    "gin",
+    "gorm",
+    "clean-architecture",
+    "create-app",
+    "playwright"
+  ],
   "scripts": {
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "start": "node ./cli/bin.js"
   },
-  "keywords": [],
   "type": "commonjs",
   "devDependencies": {
     "prettier": "^3.10.1"

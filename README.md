@@ -4,9 +4,25 @@ Template / Boilerplate para projetos em **Go (Golang)** de alta performance estr
 
 ---
 
-## ⚡ Como Usar Este Template para um Novo Projeto
+## ⚡ Como Criar um Novo Projeto com Este Template
 
-### Opção 1: Via GitHub CLI (Mais Rápido)
+### Opção 1: Via `npx` / `npm init` (Mais Rápido e Automático 🚀)
+Basta rodar um único comando no seu terminal:
+
+```bash
+# Via npm registry (recomendado):
+npx goinitshinaider meu-novo-projeto
+# ou
+npm init goinitshinaider meu-novo-projeto
+
+# Ou diretamente pelo repositório GitHub (sem precisar do npm):
+npx github:Shinaiders/initgo meu-novo-projeto
+```
+O utilitário clona o template, renomeia todos os módulos e imports Go, configura o `.env`, inicializa o git e executa o `go mod tidy` automaticamente.
+
+---
+
+### Opção 2: Via GitHub CLI
 ```bash
 # 1. Crie seu novo repositório a partir deste template e clone-o
 gh repo create meu-novo-projeto --template Shinaiders/initgo --clone --public
@@ -18,7 +34,7 @@ cd meu-novo-projeto
 make init MODULE=meu-novo-projeto
 ```
 
-### Opção 2: Pela Interface do GitHub
+### Opção 3: Pela Interface do GitHub
 1. Clique no botão verde **"Use this template"** > **"Create a new repository"** no topo desta página.
 2. Dê um nome ao seu novo repositório e clone-o na sua máquina:
    ```bash
@@ -29,12 +45,6 @@ make init MODULE=meu-novo-projeto
    ```bash
    make init MODULE=github.com/SEU_USUARIO/SEU_PROJETO
    ```
-
-O comando `make init` irá automaticamente:
-- Atualizar o nome do módulo no `go.mod` e todos os arquivos `.go`.
-- Configurar os nomes de containers e banco no `docker-compose.yml`.
-- Criar seu arquivo `.env` a partir do `.env.example`.
-- Executar `go mod tidy`.
 
 ---
 
