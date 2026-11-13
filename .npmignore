@@ -1,0 +1,14 @@
+cmd/
+internal/
+pkg/
+storage/
+scripts/
+bin/
+*.go
+TUTORIAL_*.md
+*.db
+.env*
+.air.toml
+docker-compose.yml
+Dockerfile
+Makefile

@@ -17,6 +17,10 @@
   "homepage": "https://github.com/Shinaiders/initgo#readme",
   "author": "Lucas Santana",
   "license": "MIT",
+  "files": [
+    "cli",
+    "README.md"
+  ],
   "keywords": [
     "golang",
     "template",
