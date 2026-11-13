@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify Go Dependencies
+        run: go mod verify
+
+      - name: Run Go Unit Tests
+        run: go test -v -race ./...
+
+      - name: Build Go Binary
+        run: go build -v -o bin/goscrapper cmd/api/main.go
+
+      - name: Test CLI Scaffolding (create-goinitshinaider)
+        run: |
+          node ./cli/bin.js /tmp/test-app
+          cd /tmp/test-app
+          go test -v ./...
+          go build -v -o bin/test-app cmd/api/main.go

@@ -1,5 +1,11 @@
 # initgo 🚀
 
+[![CI](https://github.com/Shinaiders/initgo/actions/workflows/ci.yml/badge.svg)](https://github.com/Shinaiders/initgo/actions/workflows/ci.yml)
+[![Template](https://img.shields.io/badge/Template-GitHub-2ea44f?logo=github)](https://github.com/Shinaiders/initgo)
+[![Go Version](https://img.shields.io/badge/Go-1.24%2B-00ADD8?logo=go)](https://go.dev/)
+[![npm](https://img.shields.io/badge/npm-goinitshinaider-CB3837?logo=npm)](https://www.npmjs.com/package/create-goinitshinaider)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Template / Boilerplate para projetos em **Go (Golang)** de alta performance estruturado com **Clean Architecture**, integrando a API web **Gin**, motor de automação e raspagem **Playwright**, ORM **GORM** (PostgreSQL/SQLite), além de suporte para **Redis**, **RabbitMQ** e **RustFS** (S3-compatible object storage).
 
 ---
